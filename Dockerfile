@@ -1,7 +1,8 @@
 # 1. Create an image to build n8n
 FROM --platform=linux/amd64 docker.n8n.io/n8nio/n8n
 USER root
-RUN addgroup -g 33 www && addgroup www node
+RUN addgroup -g 33 www-api
+RUN addgroup node www-api
 RUN apk update
 RUN apk upgrade
 RUN apk add --no-cache bash nano mc curl git htop
