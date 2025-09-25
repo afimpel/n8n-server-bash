@@ -6,7 +6,7 @@ docker container prune -f
 docker image prune -f
 
 echo "BUILD ------------------------------"
-docker pull docker.n8n.io/n8nio/n8n:latest  
+docker pull n8nio/n8n:latest
 timestamp=$(date "+%Y%m%d")
 docker build --build-arg BUILD_TAG_CUSTOM=v$timestamp -t afimpelcom/n8n-server-bash:v$timestamp -t afimpelcom/n8n-server-bash:latest -f Dockerfile . --force-rm
 
