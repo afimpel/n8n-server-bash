@@ -1,5 +1,5 @@
 # 1. Create an image to build n8n
-FROM --platform=linux/amd64 n8nio/n8n:latest
+FROM n8nio/n8n:latest
 USER root
 RUN addgroup -g 33 www-api
 RUN addgroup node www-api
