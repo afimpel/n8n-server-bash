@@ -12,4 +12,5 @@ ENV TAG_CUSTOM_BUILD=$BUILD_TAG_CUSTOM
 #ENV N8N_VERSION_BUILD=$N8N_VERSION
 ENV SHELL /bin/bash
 USER node
+COPY bashrc ~/.bashrc
 ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
