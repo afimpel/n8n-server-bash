@@ -9,8 +9,13 @@ RUN apk add --no-cache bash nano mc curl git htop coreutils
 RUN rm -rfv /var/cache/apk/*
 ARG BUILD_TAG_CUSTOM
 ENV TAG_CUSTOM_BUILD=$BUILD_TAG_CUSTOM
+COPY make-backup.sh /usr/bin/n8n-make-backup
+COPY restore-backup.sh /usr/bin/n8n-restore-backup
+RUN chmod 777 /usr/bin/n8n-make-backup /usr/bin/n8n-restore-backup
+RUN echo "N8N Version: $BUILD_TAG_CUSTOM / date: $(date)" > release.txt
 #ENV N8N_VERSION_BUILD=$N8N_VERSION
 ENV SHELL /bin/bash
 USER node
 COPY bashrc .bashrc
+RUN chown node:node .bashrc
 ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
