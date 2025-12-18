@@ -1,7 +1,7 @@
 #!/bin/bash
 date
 echo "RMI --------------------------------"
-docker rmi $(docker images | grep n8n | awk '{print $3}') --force
+docker rmi $(docker images | grep n8n | awk '{print $1}') --force
 docker container prune -f
 docker image prune -f
 
