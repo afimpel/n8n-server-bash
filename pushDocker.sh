@@ -1,18 +1,18 @@
 #!/bin/bash
 date
-echo "RMI --------------------------------"
+echo -e "\n\t------------\t RMI\t| hostname: $(hostname) \t date: $(date) \t------------\n"
 docker rmi $(docker images | grep n8n | awk '{print $1}') --force
 docker container prune -f
 docker image prune -f
 
-echo "BUILD ------------------------------"
+echo -e "\n\t------------\t BUILD\t| hostname: $(hostname) \t date: $(date) \t------------\n"
 docker pull n8nio/n8n:latest
-timestamp=$(date "+%Y%m%d")
-docker build --build-arg BUILD_TAG_CUSTOM=v$timestamp -t afimpelcom/n8n-server-bash:v$timestamp -t afimpelcom/n8n-server-bash:latest -f Dockerfile . --force-rm
+CURRENT_VERSION=$(docker image inspect n8nio/n8n:latest 2>/dev/null | jq -r '.[0].Config.Labels."org.opencontainers.image.version" // empty + "-" + .[0].Architecture')
+docker build --build-arg BUILD_TAG_CUSTOM=v$CURRENT_VERSION -t afimpelcom/n8n-server-bash:v$CURRENT_VERSION -t afimpelcom/n8n-server-bash:latest -f Dockerfile . --force-rm
 
-echo "PUSH -------------------------------"
-docker push afimpelcom/n8n-server-bash:v$timestamp
+echo -e "\n\t------------\t PUSH\t| hostname: $(hostname) \t date: $(date) \t------------\n"
+docker push afimpelcom/n8n-server-bash:v$CURRENT_VERSION
 docker push afimpelcom/n8n-server-bash:latest
 
-echo "------------------------------------"
+echo -e "\n\t------------\t END\t| hostname: $(hostname) \t date: $(date) \t------------\n"
 date
