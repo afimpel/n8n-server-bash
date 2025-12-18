@@ -18,4 +18,6 @@ RUN chown node:node /home/node/.bashrc
 #ENV N8N_VERSION_BUILD=$N8N_VERSION
 ENV SHELL /bin/bash
 USER node
+ENV N8N_BLOCK_ENV_ACCESS_IN_NODE=true
+ENV N8N_SECURITY_AUDIT_DAYS_ABANDONED_WORKFLOW=360
 ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
