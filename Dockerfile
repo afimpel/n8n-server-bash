@@ -5,7 +5,7 @@ RUN addgroup -g 33 www-api
 RUN addgroup node www-api
 RUN apk update
 RUN apk upgrade
-RUN apk add --no-cache bash nano mc curl git htop coreutils 
+RUN apk add --no-cache bash nano mc curl git htop coreutils jq bash-completion
 RUN rm -rfv /var/cache/apk/*
 ARG BUILD_TAG_CUSTOM
 ENV TAG_CUSTOM_BUILD=$BUILD_TAG_CUSTOM
